@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свадьбу | Александр и Анастасия</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: #3a3a3a;
+            background: linear-gradient(135deg, #faf6f0 0%, #f1ece4 100%);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Анимация фона */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 24px;
+            color: #d4c4a8;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(-5deg); }
+            75% { transform: translateY(20px) rotate(3deg); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.85);
+            margin: 40px 0;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(139, 115, 85, 0.08);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 196, 168, 0.1) 0%, transparent 70%);
+            animation: shimmer 8s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            color: #8b7355;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #a1927c;
+            margin-bottom: 35px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            color: #8b7355;
+            margin: 30px 0;
+            letter-spacing: 5px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .date {
+            font-size: 2em;
+            color: #9a8a73;
+            margin-bottom: 40px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px auto;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+            max-width: 500px;
+        }
+
+        .countdown-item {
+            background: rgba(245, 242, 237, 0.7);
+            padding: 25px 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            backdrop-filter
+
+blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+            flex: 0 0 auto;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #8b7355;
+            display: block;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .countdown-label {
+            font-size: 1em;
+            color: #9a8a73;
+            margin-top: 8px;
+            display: block;
+        }
+
+        .warm-words {
+            font-style: italic;
+            color: #7a6a5a;
+            line-height: 2;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.3em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timing-item {
+            margin: 20px 0;
+            padding: 25px;
+            background: rgba(249, 247, 244, 0.7);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timing-item:hover {
+            background: rgba(245, 242, 237, 0.9);
+            transform: translateX(10px);
+        }
+
+        .timing-time {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: #8b7355;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .timing-description {
+            font-size: 1em;
+            color: #7a6a5a;
+            margin-top: 5px;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #8b7355 0%, #a1927c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 20px rgba(139, 115, 85, 0.3);
+        }
+
+        .map-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139, 115, 85, 0.4);
+        }
+
+        .dress-code-intro {
+            font-size: 1.1em;
+            color: #7a6a5a;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .dress-code {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .color-box {
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .color-1 { background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%); color: #5a5a5a; }
+        .color-2 { background: linear-gradient(135deg, #e8d5c4 0%, #d4c4a8 100%); color: #5a5a5a; }
+        .color-3 { background: linear-gradient(135deg, #d4c4a8 0%, #c5b8a5 100%); color: #5a5a5a; }
+        .color-4 { background: linear-gradient(135deg, #c5b8a5 0%, #b8a99a 100%); color: white; }
+        .color-5 { background: linear-gradient(135deg, #b8a99a 0%, #a1927c 100%); color: white; }
+        .color-6 { background: linear-gradient(135deg, #a8c09a 0%, #9ab89c 100%); color: white; }
+        .color-7 { background: linear-gradient(135deg, #9ab89c 0%, #8daa8d 100%); color: white; }
+        .color-8 { background: linear-gradient(135deg, #8daa8d 0%, #7a997a 100%); color: white; }
+        .color-9 { background: linear-gradient(135deg, #d7ccc8 0%, #bcaaa4 100
+
+%); color: #5a5a5a; }
+        .color-10 { background: linear-gradient(135deg, #bcaaa4 0%, #a1887f 100%); color: white; }
+
+        .rsvp-form {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1.3em;
+            background: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: #8b7355;
+            box-shadow: 0 0 20px rgba(139, 115, 85, 0.2);
+        }
+
+        .guests-hint {
+            font-size: 0.9em;
+            color: #9a8a73;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .checkbox-group {
+            margin: 30px 0;
+        }
+
+        .checkbox-group label {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group label:hover {
+            color: #8b7355;
+        }
+
+        .checkbox-group input[type="radio"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #8b7355 0%, #a1927c 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 25px rgba(139, 115, 85, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(139, 115, 85, 0.4);
+        }
+
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+        section:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        max-width: 768px {
+            .names { font-size: 3em; }
+            h1 { font-size: 2.5em; }
+            .dress-code { grid-template-columns: repeat(2, 1fr); }
+            section { padding: 40px 20px; }
+            
+            #countdown {
+                gap: 15px;
+                max-width: 100%;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+                padding: 15px 10px;
+            }
+            
+            .countdown-number {
+                font-size: 2em;
+            }
+            
+            .countdown-label {
+                font-size: 0.9em;
+            }
+        }
+
+        max-width: 480px {
+            .countdown-item {
+                min-width: 60px;
+                padding: 12px 8px;
+            }
+            
+            .countdown-number {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-element" style="top: 10%; left: 10%; animation-delay: 0s;">✿</div>
+        <div class="floating-element" style="top: 20%; left: 80%; animation-delay: 3s;">❀</div>
+        <div class="floating-element" style=
+
+"top: 70%; left: 20%; animation-delay: 6s;">✾</div>
+        <div class="floating-element" style="top: 80%; left: 70%; animation-delay: 9s;">❁</div>
+        <div class="floating-element" style="top: 30%; left: 50%; animation-delay: 12s;">✽</div>
+    </div>
+
+    <div class="container">
+        <section>
+            <h1>Приглашение</h1>
+            <div class="names">Александр & Анастасия</div>
+            <div class="date">21 августа 2026</div>
+        </section>
+
+        <section>
+            <h2>До нашего счастья осталось:</h2>
+            <div id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">0</span>
+                    <span class="countdown-label">дней</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">0</span>
+                    <span class="countdown-label">часов</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">0</span>
+                    <span class="countdown-label">минут</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">0</span>
+                    <span class="countdown-label">секунд</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Дорогие друзья и близкие!</h2>
+            <div class="warm-words">
+                С огромной радостью приглашаем вас разделить с нами самый счастливый день в нашей жизни.
+                Ваше присутствие для нас бесценно, и мы не можем представить это торжество без вас.
+                Давайте вместе создадим воспоминания, которые будем с улыбкой вспоминать долгие годы.
+            </div>
+        </section>
+
+        <section>
+            <h2>Программа праздника</h2>
+            <div class="timing-item">
+                <div class="timing-time">15:00</div>
+                <div>Сбор гостей и велком</div>
+                <div class="timing-description">Встреча гостей, welcome-зона с напитками</div>
+            </div>
+            <div class="timing-item">
+                <div class="timing-time">16:00</div>
+                <div>Выездная церемония</div>
+                <div class="timing-description">Обмен клятвами и символами любви</div>
+            </div>
+            <div class="timing-item">
+                <div class="timing-time">17:00</div>
+                <div>Банкет</div>
+                <div class="timing-description">Торжественный ужин, тосты, танцы</div>
+            </div>
+            <div class="timing-item">
+                <div class="timing-time">23:00</div>
+                <div>Завершение вечера</div>
+                <div class="timing-description">Финальные тосты и прощальные объятия</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Место проведения</h2>
+            <p><strong>Резиденция «Берег»</strong></p>
+            <p>г. Нижний Новгород</p>
+            <p>Набережная Грибного канала, 20</p>
+            <a href="https://yandex.ru/maps/?ll=44.095752,56.308523&z=17&pt=44.095752,56.308523" class="map-link" target="_blank">Открыть на карте</a>
+        </section>
+
+        <section>
+            <h2>Дресс-код</h2>
+            <div class="dress-code-intro">
+                Мы не принуждаем, но очень хотели бы, чтобы вы придерживались нашей пастельной палитры.
+                Это поможет создать гармоничную и изысканную атмосферу нашего праздника.
+                Будем благодарны за ваше понимание и поддержку нашей идеи!
+            </div>
+            <div class="dress-code">
+                <div class="color-box color-1">Светлый беж</div>
+                <div class="color-box color-2">Песочный</div>
+                <div class="color-box color-3">Кремовый</div>
+                <div class="color-box color-4">Темный беж</div>
+                <div class="color-box color-5">Светло-коричневый</div>
+                <div class="color-box color-6">Салатовый</div>
+Яндекс Карты — транспорт, навигация, поиск мест
+Яндекс Карты — транспорт, навигация, поиск мест
+yandex.ru
+
+<div class="color-box color-7">Оливковый</div>
+                <div class="color-box color-8">Темно-зеленый</div>
+                <div class="color-box color-9">Розовый беж</div>
+                <div class="color-box color-10">Терракотовый</div>
+            </div>
+        </section>
+
+        <!-- ====== ФОРМА ОБРАТНОЙ СВЯЗИ → ПИСЬМО НА ПОЧТУ ====== -->
+        <section>
+            <h2>Подтвердите ваше присутствие</h2>
+            <form class="rsvp-form" action="https://formsubmit.co/klimochkinaff@mail.ru" method="POST">
+                <div class="form-group">
+                    <input type="text" name="Имена_гостей" class="name-input" placeholder="Имя и фамилия всех гостей" required>
+                    <div class="guests-hint">Если вас двое или более, перечислите всех</div>
+                </div>
+
+                <div class="checkbox-group">
+                    <label><input type="radio" name="Присутствие" value="да" required> Да, будем с радостью!</label>
+                    <label><input type="radio" name="Присутствие" value="нет"> К сожалению, не сможем</label>
+                </div>
+
+                <!-- служебные поля FormSubmit -->
+                <input type="hidden" name="_subject" value="Новое подтверждение на свадьбу">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="">   <!-- при желании укажите страницу «Спасибо» -->
+
+                <button type="submit" class="submit-btn">Отправить подтверждение</button>
+            </form>
+        </section>
+        <!-- ====== /ФОРМА ====== -->
+    </div>
+
+    <script>
+        // Счетчик обратного отсчета
+        function updateCountdown() {
+            const weddingDate = new Date('2026-08-21T15:00:00');
+            const now = new Date();
+            const diff = weddingDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Анимация цветов дресс-кода
+        document.querySelectorAll('.color-box').forEach(box => {
+            box.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2) rotate(5deg)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
